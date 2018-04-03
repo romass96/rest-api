@@ -3,11 +3,11 @@ package com.example.restapiexample.dto;
 import com.example.restapiexample.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-
 
 public class CreditCardDTO {
 

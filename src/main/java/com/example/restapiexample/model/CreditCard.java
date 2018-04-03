@@ -8,15 +8,13 @@ import javax.persistence.*;
 @Entity
 @Table(name = "credit_cards")
 public class CreditCard {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(name = "number", nullable = false, length = 16)
+    @Id
+    @Column(name = "number", length = 16)
     private String number;
 
-    @Column(columnDefinition = "FLOAT(10,2) default 1")
-    private Float balance;
+    @Column(name = "balance")
+    private Float balance = 0F;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -27,14 +25,6 @@ public class CreditCard {
     private User user;
 
     public CreditCard() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNumber() {
@@ -51,6 +41,14 @@ public class CreditCard {
 
     public void setBalance(Float balance) {
         this.balance = balance;
+    }
+
+    public void addMoney(Float amount) {
+        this.balance = this.balance + amount;
+    }
+
+    public void subtractMoney(Float amount) {
+        this.balance = this.balance - amount;
     }
 
     public String getPassword() {
