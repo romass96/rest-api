@@ -8,18 +8,15 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false)
     @NotBlank
     private String name;
-
-    @Column(name = "password", nullable = false)
-    @NotBlank
-    private String password;
 
     @Column(name = "birthday", nullable = false)
     @NotNull
@@ -30,14 +27,12 @@ public class User {
     @NotNull
     private Gender gender;
 
-    @Column(name = "cardNumber", nullable = false, length = 16)
-    private String cardNumber;
-
-    @Column(name = "balance", nullable = false, columnDefinition = "Decimal(10,2) default '0.00'")
-    private Float balance;
-
     @Column(name = "address", nullable = false)
     private String address;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+    private CreditCard creditCard;
+
 
     public User() {
     }
@@ -74,35 +69,19 @@ public class User {
         this.gender = gender;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public Float getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Float balance) {
-        this.balance = balance;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 }
